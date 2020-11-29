@@ -2,46 +2,46 @@ import React, { Component } from 'react';
 import { ListGroup, ListGroupItem, Button, Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
-export default class ProductList extends Component {
+export default class CategoryList extends Component {
     constructor(props){
         super(props);
         this.render = this.render.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
-        this.generateProductItem = this.generateProductItem.bind(this);
+        this.generateCategoryItem = this.generateCategoryItem.bind(this);
         this.state = {
-            productList: []
+            categoryList: []
         }
     }
 
     componentDidMount(){
-        this.setState({productList: [...this.props.data]});
+        this.setState({categoryList: [...this.props.data]});
     }
 
 
-    generateProductItem(product){
+    generateCategoryItem(category){
         return (
             <ListGroupItem className="d-flex">
-                <strong>{product.nome}</strong>
+                <strong>{category.nome}</strong>
                 <div className="ml-auto">
-                    <Link className="btn btn-warning mr-1" to={`edit/${product.id}`}>Edit</Link>
+                    <Link className="btn btn-warning mr-1" to={`edit/${category.id}`}>Edit</Link>
                     <Button color="danger" >Delete</Button>
-                </div>
+            </div>
             </ListGroupItem>
         );  
     }
 
     render(){
-        let renderProductList = [];
-        for(let i = 0; i < this.state.productList.length; i++){
-            renderProductList.push(this.generateProductItem(this.state.productList[i]))
+        let renderCategoryList = [];
+        for(let i = 0; i < this.state.categoryList.length; i++){
+            renderCategoryList.push(this.generateCategoryItem(this.state.categoryList[i]))
         }
         return ( 
             <div className="container">
                 <ListGroup className="container">
-                    {(this.state.productList.length === 0) ? (
-                        <strong>No products to show you.</strong>
+                    {(this.state.categoryList.length === 0) ? (
+                        <strong>No Categories to show you.</strong>
 
-                    ) : renderProductList}
+                    ) : renderCategoryList}
                 </ListGroup>
             </div>
         )
