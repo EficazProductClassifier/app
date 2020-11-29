@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Header from "../../components/Header"
 import CategoryService from "../../services/categories.js";
 import CategoryList from '../../components/CategoryList';
-import { Spinner } from 'reactstrap';
+import { Spinner, Button, Container } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 export default class Categories extends Component {
 
@@ -30,15 +31,18 @@ export default class Categories extends Component {
 
     render(){
         return (
-            <div className="container">
+            <Container>
                 <Header />
                 <div className="page">
                     <p>Categories page.</p>
                     {(this.state.fetchingData) ? (this.renderSpinner) : (
                         <CategoryList data={this.state.categories} />
                     )}
+                    <div align="center">
+                        <Link className="btn btn-success mt-5" to='category/create'>Criar uma nova categoria</Link>
+                    </div>
                 </div>
-            </div>
+            </Container>
         );
     }
 }

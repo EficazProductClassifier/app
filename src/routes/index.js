@@ -18,12 +18,12 @@ export default class ApplicationRoutes extends Component {
                 <Route path="/" exact component={Home}/>
 
                 <Route path="/products" exact component={Products}/>
-                <Route path="/products/add" exact component={CreateProduct}/>
-                <Route path="/products/edit/:uuid" exact component={EditProduct}/>
+                <Route path="/product/create" exact component={CreateProduct}/>
+                <Route path="/product/edit/:uuid" exact component={EditProduct}/>
 
                 <Route path="/categories" exact component={Categories}/>
-                <Route path="/categories/add" exact component={CreateCategory}/>
-                <Route path="/categories/edit/:uuid" exact component={EditCategory}/>
+                <Route path="/category/create" exact component={CreateCategory}/>
+                <Route path="/category/edit/:uuid" exact component={EditCategory}/>
             </Router>
         );
     }

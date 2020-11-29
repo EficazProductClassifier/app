@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Button, Spinner } from 'reactstrap';
+import { ListGroup, ListGroupItemText, ListGroupItemHeading, ListGroupItem, Button, Spinner } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
@@ -20,11 +20,14 @@ export default class ProductList extends Component {
 
     generateProductItem(product){
         return (
-            <ListGroupItem className="d-flex">
-                <strong>{product.nome}</strong>
-                <div className="ml-auto">
-                    <Link className="btn btn-warning mr-1" to={`edit/${product.id}`}>Edit</Link>
-                    <Button color="danger" >Delete</Button>
+            <ListGroupItem className="">
+                <ListGroupItemHeading>{product.nome}</ListGroupItemHeading>
+                <ListGroupItemText>{product.categoria.nome}</ListGroupItemText>
+                <div className="d-flex">
+                    <div className="ml-auto">
+                        <Link className="btn btn-warning mr-1" to={`product/edit/${product.id}`}>Edit</Link>
+                        <Button color="danger" >Delete</Button>
+                    </div>
                 </div>
             </ListGroupItem>
         );  
@@ -40,7 +43,6 @@ export default class ProductList extends Component {
                 <ListGroup className="container">
                     {(this.state.productList.length === 0) ? (
                         <strong>No products to show you.</strong>
-
                     ) : renderProductList}
                 </ListGroup>
             </div>
