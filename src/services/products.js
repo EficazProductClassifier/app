@@ -2,7 +2,7 @@ import * as Api from '../apis/eficaz_product_classifier_api.js';
 
 const END_POINT = 'product';
 
-export default {
+const ProductsService = {
 
     /**
      * Gets all the products. 
@@ -59,3 +59,5 @@ export default {
             .then(payload => payload.data)
     },
 }
+
+export default ProductsService;

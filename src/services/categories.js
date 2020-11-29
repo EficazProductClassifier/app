@@ -2,7 +2,7 @@ import * as Api from '../apis/eficaz_product_classifier_api.js';
 
 const END_POINT = 'category';
 
-export default {
+const CategoriesService = {
 
     /**
      * Gets all the categories. 
@@ -59,3 +59,6 @@ export default {
             .then(payload => payload.data)
     },
 }
+
+export default CategoriesService;
+
