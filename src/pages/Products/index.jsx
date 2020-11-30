@@ -55,7 +55,7 @@ export default class Products extends Component {
                         <ProductList data={this.state.products} onDelete={this.deleteProduct}/>
                     )}
                     <div align="center">
-                        <Link className="btn btn-success mt-3 mb-5" to='product/create'>Criar um novo produto</Link>
+                        <Link className="btn btn-success mt-3 mb-5" to='product/create'>Create a new product</Link>
                     </div>
                 </div>
             </Container>
