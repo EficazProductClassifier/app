@@ -45,8 +45,19 @@ export default class EditProduct extends Component {
     }
 
     componentDidMount(){
+        let uuid = this.props.match.params.uuid;
         CategoriesService.all()
             .then(payload => this.setState({categoryList: payload.data}))
+        ProductsService.get(uuid)
+            .then(payload => {
+                this.setState({
+                    name: payload.data.nome,
+                    desc: payload.data.descricao,
+                    value: payload.data.valor,
+                    stock: payload.data.estoque,
+                    category_id: payload.data.categoria.id
+                })
+            });
     }
 
     generateCategoryOption(category){
@@ -69,20 +80,20 @@ export default class EditProduct extends Component {
                 <Form>
                     <FormGroup>
                         <Label>Nome</Label>
-                        <Input type="text" placeholder="Nome do Produto" onChange={(e) => this.handleChangeName(e)}></Input>
+                        <Input type="text" value={this.state.name} placeholder="Nome do Produto" onChange={(e) => this.handleChangeName(e)}></Input>
                         <Label>Descricao</Label>
-                        <Input type="text" placeholder="Descricao do Produto" onChange={(e) => this.handleChangeDesc(e)}></Input>
+                        <Input type="text" value={this.state.desc} placeholder="Descricao do Produto" onChange={(e) => this.handleChangeDesc(e)}></Input>
                         <Row>
                             <Col md={3}>
                                 <FormGroup>
                                     <Label>Valor</Label>
-                                    <Input type="value" placeholder="Valor do Produto" onChange={e => this.handleChangePrice(e)}></Input>
+                                    <Input type="value" value={this.state.value} placeholder="Valor do Produto" onChange={e => this.handleChangePrice(e)}></Input>
                                 </FormGroup>
                             </Col>
                             <Col md={3}>
                                 <FormGroup>
                                     <Label>Estoque</Label>
-                                    <Input type="text" placeholder="Quantidade em Estoque" onChange={e => this.handleChangeStock(e)}></Input>
+                                    <Input type="text" value={this.state.stock} placeholder="Quantidade em Estoque" onChange={e => this.handleChangeStock(e)}></Input>
                                 </FormGroup>
                             </Col>
 
