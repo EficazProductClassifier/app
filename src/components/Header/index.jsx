@@ -16,11 +16,10 @@ import {
 
 const Header = (props) => {
     const [isOpen, setIsOpen] = useState(false);
-
     const toggle = () => setIsOpen(!isOpen);
 
     return (
-        <div>
+        <div className="">
             <Navbar color="light" light expand="md">
                 <NavbarBrand href="/">Eficaz Product Classifier</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
