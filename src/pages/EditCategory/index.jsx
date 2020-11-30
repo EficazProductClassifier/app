@@ -17,6 +17,14 @@ export default class EditCategory extends Component {
         };
     }
 
+    async componentDidMount(){
+        let uuid = this.props.match.params.uuid;
+        CategoriesService.get(uuid)
+            .then(payload => {
+                this.setState({name: payload.data.nome, desc: payload.data.descricao});
+            });
+    }
+
     handleChangeName(event) {
         this.setState({name: event.target.value});
     }
@@ -43,9 +51,9 @@ export default class EditCategory extends Component {
                 <Form>
                     <FormGroup>
                         <Label>Nome</Label>
-                        <Input type="text" placeholder="Nome da Categoria" onChange={e => this.handleChangeName(e)}></Input>
+                        <Input type="text" placeholder="Nome da Categoria" value={this.state.name} onChange={e => this.handleChangeName(e)}></Input>
                         <Label>Descricao</Label>
-                        <Input type="text" placeholder="Descricao da Categoria" onChange={e => this.handleChangeDesc(e)}></Input>
+                        <Input type="text" placeholder="Descricao da Categoria" value={this.state.desc} onChange={e => this.handleChangeDesc(e)}></Input>
                     </FormGroup>
 
                     <div className="d-flex">
