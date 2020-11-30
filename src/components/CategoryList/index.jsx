@@ -42,8 +42,10 @@ export default class CategoryList extends Component {
             <div className="container">
                 <ListGroup className="container">
                     {(this.state.categoryList.length === 0) ? (
-                        <strong>No Categories to show you.</strong>
-
+                        <div align="center">
+                            <h2 className="mt-2 mb-4">No Categories to show you :(</h2>
+                            <h2 className="mt-2 mb-4">Try creating one.</h2>
+                        </div>
                     ) : renderCategoryList}
                 </ListGroup>
             </div>

@@ -17,6 +17,7 @@ export default class Products extends Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.refreshData = this.refreshData.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
     }
 
     componentDidMount(){
@@ -30,10 +31,14 @@ export default class Products extends Component {
             })
             .catch(e => console.warn(e))
     }
+    
+    refreshPage(){
+        window.location.reload();
+    }
 
     deleteProduct(uuid){
         ProductsService.delete(uuid)
-            .then(this.refreshData());
+            .then(() => this.refreshPage());
     }
 
     renderSpinner(){
@@ -45,12 +50,12 @@ export default class Products extends Component {
             <Container >
                 <Header />
                 <div className="page">
-                    <p>Products page.</p>
+                    <h1 align="center" className="mt-2 mb-4">Products page</h1>
                     {(this.state.fetchingData) ? (this.renderSpinner()) : (
                         <ProductList data={this.state.products} onDelete={this.deleteProduct}/>
                     )}
                     <div align="center">
-                        <Link className="btn btn-success mt-3 mb-5" to='product/create'>Criar um novo produto</Link>
+                        <Link className="btn btn-success mt-3 mb-5" to='product/create'>Create a new product</Link>
                     </div>
                 </div>
             </Container>

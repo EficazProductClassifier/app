@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from "../../components/Header";
 import CategoriesService from "../../services/categories.js";
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class EditCategory extends Component {
     constructor(props){
@@ -15,6 +15,14 @@ export default class EditCategory extends Component {
             name: '',
             desc: ''
         };
+    }
+
+    async componentDidMount(){
+        let uuid = this.props.match.params.uuid;
+        CategoriesService.get(uuid)
+            .then(payload => {
+                this.setState({name: payload.data.nome, desc: payload.data.descricao});
+            });
     }
 
     handleChangeName(event) {
@@ -32,7 +40,10 @@ export default class EditCategory extends Component {
             'descricao': this.state.desc
         };
         CategoriesService.update(uuid, payload)
-            .then(console.log('updated'))
+            .then(() => {
+                alert('Successfully Updated');
+                this.props.history.push('/categories')
+            })
     }
 
 
@@ -43,9 +54,9 @@ export default class EditCategory extends Component {
                 <Form>
                     <FormGroup>
                         <Label>Nome</Label>
-                        <Input type="text" placeholder="Nome da Categoria" onChange={e => this.handleChangeName(e)}></Input>
+                        <Input type="text" placeholder="Nome da Categoria" value={this.state.name} onChange={e => this.handleChangeName(e)}></Input>
                         <Label>Descricao</Label>
-                        <Input type="text" placeholder="Descricao da Categoria" onChange={e => this.handleChangeDesc(e)}></Input>
+                        <Input type="text" placeholder="Descricao da Categoria" value={this.state.desc} onChange={e => this.handleChangeDesc(e)}></Input>
                     </FormGroup>
 
                     <div className="d-flex">

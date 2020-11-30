@@ -7,7 +7,11 @@ export default class Home extends Component {
         return (
             <div className="container">    
                 <Header />
-                <p>Home Page</p>
+                <div align="center">
+                    <h1 className="mt-2 mb-4">Home Page</h1>
+                    <p> A ReactJS application utilizing Bootstrap framework with CRUD implementation for the Eficaz Product Classifier API.  </p>
+                </div>
+
             </div>
         );
     }

@@ -47,7 +47,10 @@ export default class ProductList extends Component {
             <div className="container">
                 <ListGroup className="container">
                     {(this.state.productList.length === 0) ? (
-                        <strong>No products to show you.</strong>
+                        <div align="center">
+                            <h2 className="mt-2 mb-4">No Products to show you :(</h2>
+                            <h2 className="mt-2 mb-4">Try creating one.</h2>
+                        </div>
                     ) : renderProductList}
                 </ListGroup>
             </div>

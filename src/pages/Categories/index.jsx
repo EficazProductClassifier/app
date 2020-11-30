@@ -16,6 +16,7 @@ export default class Categories extends Component {
         this.render = this.render.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
         this.refreshData = this.refreshData.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
@@ -23,6 +24,9 @@ export default class Categories extends Component {
         this.refreshData();
     } 
 
+    refreshPage(){
+        window.location.reload();
+    }
 
     refreshData(){
         CategoriesService.all()
@@ -34,7 +38,7 @@ export default class Categories extends Component {
 
     deleteCategory(uuid){
         CategoriesService.delete(uuid)
-            .then(this.refreshData());
+            .then(() => this.refreshPage());
     }
 
     renderSpinner(){
@@ -46,12 +50,12 @@ export default class Categories extends Component {
             <Container>
                 <Header />
                 <div className="page">
-                    <p>Categories page.</p>
+                    <h1 align="center" className="mt-2 mb-4">Categories page</h1>
                     {(this.state.fetchingData) ? (this.renderSpinner()) : (
                         <CategoryList data={this.state.categories} onDelete={this.deleteCategory}/>
                     )}
                     <div align="center">
-                        <Link className="btn btn-success mt-3 mb-5" to='category/create'>Criar uma nova categoria</Link>
+                        <Link className="btn btn-success mt-3 mb-5" to='category/create'>Create a new category</Link>
                     </div>
                 </div>
             </Container>
