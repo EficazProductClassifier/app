@@ -5,6 +5,36 @@ import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class CreateCategory extends Component {
+    contructor(){
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeDesc = this.handleChangeDesc.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.render = this.render.bind(this);
+        this.state = {
+            name: '',
+            desc: ''
+        };
+    }
+
+    handleChangeName(event) {
+        this.setState({name: event.target.value});
+    }
+
+    handleChangeDesc(event){
+        this.setState({desc: event.target.value});
+    }
+
+
+    handleSubmit(){
+        let payload = {
+            'nome': this.state.name,
+            'descricao': this.state.desc
+        };
+        CategoriesService.create(payload)
+            .then(console.log('created'))
+    }
+
+
     render(){
         return (
             <Container >
@@ -12,19 +42,16 @@ export default class CreateCategory extends Component {
                 <Form>
                     <FormGroup>
                         <Label>Nome</Label>
-                        <Input type="text" placeholder="Nome da Categoria"></Input>
+                        <Input type="text" placeholder="Nome da Categoria" onChange={e => this.handleChangeName(e)}></Input>
                         <Label>Descricao</Label>
-                        <Input type="text" placeholder="Descricao da Categoria"></Input>
+                        <Input type="text" placeholder="Descricao da Categoria" onChange={e => this.handleChangeDesc(e)}></Input>
                     </FormGroup>
-
-
 
                     <div className="d-flex">
                         <div className="ml-auto">
-                            <Button type="submit" className="btn btn-success mr-1">Enviar</Button>
+                            <Button className="btn btn-success mr-1" onClick={() => this.handleSubmit()}>Enviar</Button>
                             <Link to="/" className="btn btn-danger mr-1">Cancelar</Link>
                         </div>
-
                     </div>
                 </Form>
             </Container>
