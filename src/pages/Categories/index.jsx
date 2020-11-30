@@ -16,6 +16,7 @@ export default class Categories extends Component {
         this.render = this.render.bind(this);
         this.deleteCategory = this.deleteCategory.bind(this);
         this.refreshData = this.refreshData.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
     }
 
@@ -23,6 +24,9 @@ export default class Categories extends Component {
         this.refreshData();
     } 
 
+    refreshPage(){
+        window.location.reload();
+    }
 
     refreshData(){
         CategoriesService.all()
@@ -34,7 +38,7 @@ export default class Categories extends Component {
 
     deleteCategory(uuid){
         CategoriesService.delete(uuid)
-            .then(this.refreshData());
+            .then(() => this.refreshPage());
     }
 
     renderSpinner(){

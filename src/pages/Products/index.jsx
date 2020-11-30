@@ -17,6 +17,7 @@ export default class Products extends Component {
         this.componentDidMount = this.componentDidMount.bind(this);
         this.refreshData = this.refreshData.bind(this);
         this.deleteProduct = this.deleteProduct.bind(this);
+        this.refreshPage = this.refreshPage.bind(this);
     }
 
     componentDidMount(){
@@ -30,10 +31,14 @@ export default class Products extends Component {
             })
             .catch(e => console.warn(e))
     }
+    
+    refreshPage(){
+        window.location.reload();
+    }
 
     deleteProduct(uuid){
         ProductsService.delete(uuid)
-            .then(this.refreshData());
+            .then(() => this.refreshPage());
     }
 
     renderSpinner(){
