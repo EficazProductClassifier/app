@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItemText, ListGroupItemHeading, ListGroupItem, Button, Spinner } from 'reactstrap';
+import { ListGroup, ListGroupItemText, ListGroupItemHeading, ListGroupItem, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class ProductList extends Component {
@@ -17,10 +17,9 @@ export default class ProductList extends Component {
         this.setState({productList: [...this.props.data]});
     }
 
-
     generateProductItem(product){
         return (
-            <ListGroupItem className="">
+            <ListGroupItem key={product.id}>
                 <ListGroupItemHeading>{product.nome}</ListGroupItemHeading>
                 <ListGroupItemText>{product.categoria.nome}</ListGroupItemText>
                 <div className="d-flex">

@@ -35,7 +35,7 @@ export default class Products extends Component {
                 <Header />
                 <div className="page">
                     <p>Products page.</p>
-                    {(this.state.fetchingData) ? (this.renderSpinner) : (
+                    {(this.state.fetchingData) ? (this.renderSpinner()) : (
                         <ProductList data={this.state.products} />
                     )}
                     <div align="center">
