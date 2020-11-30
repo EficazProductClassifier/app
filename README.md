@@ -1,6 +1,6 @@
 # Eficaz Product Classifier - API.
 
-A ReactJS application utillizing Bootstrap framework with CRUD implementation for the [Eficaz Product Classifier API](https://github.com/EficazProductClassifier/api).
+A ReactJS application utilizing Bootstrap framework with CRUD implementation for the [Eficaz Product Classifier API](https://github.com/EficazProductClassifier/api).
 
 # Installation 
 Install the dependencies of the project with: 
