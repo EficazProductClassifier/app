@@ -5,7 +5,8 @@ import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class CreateCategory extends Component {
-    contructor(){
+    constructor(props){
+        super(props);
         this.handleChangeName = this.handleChangeName.bind(this);
         this.handleChangeDesc = this.handleChangeDesc.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
