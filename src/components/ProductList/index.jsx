@@ -8,12 +8,18 @@ export default class ProductList extends Component {
         this.render = this.render.bind(this);
         this.componentDidMount = this.componentDidMount.bind(this);
         this.generateProductItem = this.generateProductItem.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
         this.state = {
             productList: []
         }
     }
 
     componentDidMount(){
+        this.setState({productList: [...this.props.data]});
+    }
+
+    deleteProduct(uuid){
+        this.props.onDelete(uuid);
         this.setState({productList: [...this.props.data]});
     }
 
@@ -25,7 +31,7 @@ export default class ProductList extends Component {
                 <div className="d-flex">
                     <div className="ml-auto">
                         <Link className="btn btn-warning mr-1" to={`product/edit/${product.id}`}>Edit</Link>
-                        <Button color="danger" >Delete</Button>
+                        <Button color="danger" onClick={e => this.deleteProduct(product.id)}>Delete</Button>
                     </div>
                 </div>
             </ListGroupItem>
