@@ -50,7 +50,7 @@ export default class Categories extends Component {
             <Container>
                 <Header />
                 <div className="page">
-                    <p>Categories page.</p>
+                    <h1 align="center" className="mt-2 mb-4">Categories page</h1>
                     {(this.state.fetchingData) ? (this.renderSpinner()) : (
                         <CategoryList data={this.state.categories} onDelete={this.deleteCategory}/>
                     )}

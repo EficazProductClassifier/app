@@ -50,7 +50,7 @@ export default class Products extends Component {
             <Container >
                 <Header />
                 <div className="page">
-                    <p>Products page.</p>
+                    <h1 align="center" className="mt-2 mb-4">Products page</h1>
                     {(this.state.fetchingData) ? (this.renderSpinner()) : (
                         <ProductList data={this.state.products} onDelete={this.deleteProduct}/>
                     )}
