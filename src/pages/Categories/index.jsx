@@ -51,7 +51,7 @@ export default class Categories extends Component {
                         <CategoryList data={this.state.categories} onDelete={this.deleteCategory}/>
                     )}
                     <div align="center">
-                        <Link className="btn btn-success mt-5" to='category/create'>Criar uma nova categoria</Link>
+                        <Link className="btn btn-success mt-3 mb-5" to='category/create'>Criar uma nova categoria</Link>
                     </div>
                 </div>
             </Container>

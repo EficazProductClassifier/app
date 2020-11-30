@@ -1,19 +1,44 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import {
+    Collapse,
+    Navbar,
+    NavbarToggler,
+    NavbarBrand,
+    Nav,
+    NavItem,
+    NavLink,
+    UncontrolledDropdown,
+    DropdownToggle,
+    DropdownMenu,
+    DropdownItem,
+    NavbarText
+} from 'reactstrap';
 
-export default class Header extends Component {
-    render(){
-        return(
-            <div className="container">
-                <nav>
-                    <ul>
-                        <li> <a href="/" >Home</a> </li>
-                        <li> <a href="/products" >Products</a> </li>
-                        <li> <a href="/categories" >Categories</a> </li>
-                    </ul>
-                </nav>
+const Header = (props) => {
+    const [isOpen, setIsOpen] = useState(false);
 
-            </div>
-        );
-    }
-} 
+    const toggle = () => setIsOpen(!isOpen);
+
+    return (
+        <div>
+            <Navbar color="light" light expand="md">
+                <NavbarBrand href="/">Eficaz Product Classifier</NavbarBrand>
+                <NavbarToggler onClick={toggle} />
+                <Collapse isOpen={isOpen} navbar>
+                    <div className="d-flex">
+                        <Nav className="mr-auto" navbar>
+                            <NavItem>
+                                <NavLink href="/products">Products</NavLink>
+                            </NavItem>
+                            <NavItem>
+                                <NavLink href="/categories">Categories</NavLink>
+                            </NavItem>
+                        </Nav>
+                    </div>
+                </Collapse>
+            </Navbar>
+        </div>
+    );
+}
+
+export default Header;
