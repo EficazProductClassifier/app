@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup, ListGroupItem, Button, Spinner, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
+import { ListGroup, ListGroupItem, Button, ListGroupItemHeading, ListGroupItemText } from 'reactstrap';
 import { Link } from 'react-router-dom';
 
 export default class CategoryList extends Component {
@@ -20,14 +20,13 @@ export default class CategoryList extends Component {
 
     generateCategoryItem(category){
         return (
-            <ListGroupItem className="">
+            <ListGroupItem key={category.id}>
                 <ListGroupItemHeading>{category.nome}</ListGroupItemHeading>
                 <ListGroupItemText>{category.descricao}</ListGroupItemText>
                 <div className="d-flex">
-
                     <div className="ml-auto">
                         <Link className="btn btn-warning mr-1" to={`category/edit/${category.id}`}>Edit</Link>
-                        <Button color="danger" >Delete</Button>
+                        <Button color="danger" onClick={e => this.props.onDelete(category.id)}>Delete</Button>
                     </div>
                 </div>
             </ListGroupItem>
