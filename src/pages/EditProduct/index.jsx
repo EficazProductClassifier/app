@@ -6,39 +6,91 @@ import { Container, Form, FormGroup, Label, Input, Button, Row, Col } from 'reac
 import { Link } from 'react-router-dom';
 
 export default class EditProduct extends Component {
+    constructor(props){
+        super(props);
+        this.handleChangeName = this.handleChangeName.bind(this);
+        this.handleChangeDesc = this.handleChangeDesc.bind(this);
+        this.handleChangePrice = this.handleChangePrice.bind(this);
+        this.handleChangeStock = this.handleChangeStock.bind(this);
+        this.handleChangeCategory = this.handleChangeCategory.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.render = this.render.bind(this);
+        this.state = {
+            name: '',
+            desc: '',
+            value: '',
+            stock: '',
+            category_id: '',
+            categoryList: [],
+            fetchingData: true,
+        };
+    }
+
+    handleChangeName(event){ this.setState({name: event.target.value}); }
+    handleChangeDesc(event){ this.setState({desc: event.target.value}); }
+    handleChangePrice(event){ this.setState({value : event.target.value}); }
+    handleChangeStock(event){ this.setState({stock: event.target.value}); }
+    handleChangeCategory(event){ this.setState({category_id: event.target.value}); }
+    handleSubmit(){
+        let uuid = this.props.match.params.uuid;
+        let payload = {
+            'nome': this.state.name,
+            'descricao': this.state.desc,
+            'valor': this.state.value,
+            'estoque': this.state.stock,
+            'category_id': this.state.category_id
+        };
+        ProductsService.update(uuid, payload)
+            .then(console.log('updated'))
+    }
+
+    componentDidMount(){
+        CategoriesService.all()
+            .then(payload => this.setState({categoryList: payload.data}))
+    }
+
+    generateCategoryOption(category){
+        return (
+            <option key={category.id} value={category.id}>{category.nome}</option>
+        )
+    }
+
+
     render(){
+        let renderCategoryOptions = [];
+        for(let i = 0; i < this.state.categoryList.length; i++){
+            renderCategoryOptions.push(this.generateCategoryOption(this.state.categoryList[i]))
+        }
+
+
         return (
             <Container >
                 <Header />
                 <Form>
                     <FormGroup>
                         <Label>Nome</Label>
-                        <Input type="text" placeholder="Nome do Produto"></Input>
+                        <Input type="text" placeholder="Nome do Produto" onChange={(e) => this.handleChangeName(e)}></Input>
                         <Label>Descricao</Label>
-                        <Input type="text" placeholder="Descricao do Produto"></Input>
+                        <Input type="text" placeholder="Descricao do Produto" onChange={(e) => this.handleChangeDesc(e)}></Input>
                         <Row>
                             <Col md={3}>
                                 <FormGroup>
                                     <Label>Valor</Label>
-                                    <Input type="value" placeholder="Valor do Produto"></Input>
+                                    <Input type="value" placeholder="Valor do Produto" onChange={e => this.handleChangePrice(e)}></Input>
                                 </FormGroup>
                             </Col>
                             <Col md={3}>
                                 <FormGroup>
                                     <Label>Estoque</Label>
-                                    <Input type="text" placeholder="Quantidade em Estoque"></Input>
+                                    <Input type="text" placeholder="Quantidade em Estoque" onChange={e => this.handleChangeStock(e)}></Input>
                                 </FormGroup>
                             </Col>
 
                             <Col md={6}>
                                 <FormGroup>
                                     <Label>Categoria</Label>
-                                    <Input type="select" name="select" id="exampleSelect">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
+                                    <Input type="select" onChange={e => this.handleChangeCategory(e)}>
+                                        {renderCategoryOptions}
                                     </Input>
                                 </FormGroup>
                             </Col>
@@ -53,7 +105,7 @@ export default class EditProduct extends Component {
 
                     <div className="d-flex">
                         <div className="ml-auto">
-                            <Button type="submit" className="btn btn-success mr-1">Enviar</Button>
+                            <Button onClick={() => this.handleSubmit()} className="btn btn-success mr-1">Enviar</Button>
                             <Link to="/" className="btn btn-danger mr-1">Cancelar</Link>
                         </div>
 
