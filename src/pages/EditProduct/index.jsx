@@ -41,7 +41,10 @@ export default class EditProduct extends Component {
             'category_id': this.state.category_id
         };
         ProductsService.update(uuid, payload)
-            .then(console.log('updated'))
+            .then(() => {
+                alert('Successfully Updated');
+                this.props.history.push('/products');
+            })
     }
 
     componentDidMount(){

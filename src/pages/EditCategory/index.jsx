@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Header from "../../components/Header";
 import CategoriesService from "../../services/categories.js";
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 
 export default class EditCategory extends Component {
     constructor(props){
@@ -40,7 +40,10 @@ export default class EditCategory extends Component {
             'descricao': this.state.desc
         };
         CategoriesService.update(uuid, payload)
-            .then(console.log('updated'))
+            .then(() => {
+                alert('Successfully Updated');
+                this.props.history.push('/categories')
+            })
     }
 
 
